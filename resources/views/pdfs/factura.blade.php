@@ -110,7 +110,9 @@
                 <td style="font-size: 20px" colspan="2" class="text-right">{{$empresa->moneda}} {{number_format($factura->cobrado,2)}}</td>
             </tr>
             <tr>
+
                 <td colspan="2" class="text-right" style="font-size: 20px">Change:</td>
+
                 <td style="font-size: 20px" colspan="2" class="text-right">{{$empresa->moneda}} {{number_format($factura->cambio,2)}}</td>
             </tr>
         </tbody>
