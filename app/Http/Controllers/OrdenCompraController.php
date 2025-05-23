@@ -69,6 +69,6 @@ class OrdenCompraController extends Controller
             'orden'   => $orden,
         ]);
         $pdf->setPaper('letter');
-        return $pdf->stream('ORDEN DE COMPRA '.$orden->cod.'pdf');
+        return $pdf->stream('ORDEN DE COMPRA '.$orden->cod.'.pdf');
     }
 }
