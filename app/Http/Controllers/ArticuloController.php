@@ -271,37 +271,48 @@ class ArticuloController extends Controller
     }
 
     public function articulos(){
-        $articulos = Articulo::with([
-            'precio_articulos' => function ($query) {
-                $query->where('is_activo', 1)
-                    ->with('impuesto');
-            },
-            'sub_familia_articulo'
-        ])->get();
+        $articulos = Articulo::query()
+            ->select([
+                'id',
+                'nombre',
+                'descripcion',
+                'codigo_barras',
+                'is_visible',
+                'sub_familia_articulo_id',
+            ])
+            ->where('is_visible', 1)
+            ->with([
+                'sub_familia_articulo:id,nombre',
 
-//        $combos = DB::table('combos')
-//            ->select('combos.detalle','combos.id','combos.activo','combos.nombre','combos.precio','combos.articulos','combos.cant_permitida_x_niveles')
-//            ->where('activo', 1)
-//            ->get();
-        $combos = Combo::with([
-            'cuerpo_combos' => function($query){
-                $query->with([
-                    'articulo' => function($query){
-                        $query->with(['sub_familia_articulo']);
-                    }
-                ]);
-            }
-        ])->where('activo',1)
+                'precio_articulos' => function ($query) {
+                    $query->select([
+                        'id',
+                        'articulo_id',
+                        'precio',
+                        'impuesto_id',
+                        'is_activo',
+                    ])
+                        ->where('is_activo', 1)
+                        ->with([
+                            'impuesto:id,nombre,porcentaje'
+                        ]);
+                },
+            ])
             ->get();
-//        foreach ($combos as $combo):
-//            $ids = json_decode($combo->articulos);
-//            $combo->arts = [];
-//            for ($i = 0; $i < count($ids); $i++):
-//                $data = Articulo::with(['sub_familia_articulo'])->where('id',$ids[$i])->first();
-//                array_push($combo->arts, $data);
-//            endfor;
-//        endforeach;
 
-        return response()->json(['inventario'=>$articulos,'combos'=>$combos],200);
+
+//        $combos = Combo::with([
+//            'cuerpo_combos' => function($query){
+//                $query->with([
+//                    'articulo' => function($query){
+//                        $query->with(['sub_familia_articulo']);
+//                    }
+//                ]);
+//            }
+//        ])->where('activo',1)
+//            ->get();
+
+
+        return response()->json(['inventario'=>$articulos,'combos'=>[]],200);
     }
 }
