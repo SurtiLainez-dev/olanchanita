@@ -115,7 +115,7 @@ class FacturasController extends Controller
                 $nuevoRegistroFactura->precio       = $cuerpo['precio'];
                 $nuevoRegistroFactura->total        = $cuerpo['total'];
 
-                $nuevoRegistroFactura->precio_sides = $cuerpo['precio_sides'] ?? 0;
+                $nuevoRegistroFactura->precio_sides = $cuerpo['precio_sides'] ?? null;
 
                 $nuevoRegistroFactura->sin_imp      = $taxIndividual;
                 $nuevoRegistroFactura->sin_imp_total =  $taxTotal;
