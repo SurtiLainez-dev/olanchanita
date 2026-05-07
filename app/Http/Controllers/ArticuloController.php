@@ -272,8 +272,9 @@ class ArticuloController extends Controller
 
     public function articulos(){
         $articulos = Articulo::with([
-            'precio_articulos' => function($query){
-                $query->where('is_activo',1);
+            'precio_articulos' => function ($query) {
+                $query->where('is_activo', 1)
+                    ->with('impuesto');
             },
             'sub_familia_articulo'
         ])->get();
