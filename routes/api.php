@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('registrar_empresa', [\App\Http\Controllers\UsuarioController::class, 'registroEmpresa']);
 Route::post('login',             [\App\Http\Controllers\UsuarioController::class, 'login']);
 
-//prueba
-
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
@@ -29,8 +27,9 @@ Route::group(['middleware' => 'checkclave'], function (){
         Route::get('recibo/user={user}/contador={contador}/{clave}',        [\App\Http\Controllers\ReciboController::class,    'printRecibo']);
         Route::get('retirada_efectivo/user={user}/retirada={id}/{clave}',   [\App\Http\Controllers\CajaController::class,      'imprimirRetiradaEfectivo']);
         Route::get('cierre/user={user}/fecha={fecha}/{clave}/caja={caja}',  [\App\Http\Controllers\CierreCajaController::class,'imprimirCierre']);
-        Route::get('reporte_cuentas/user={user}/cliente={id}/{clave}',[\App\Http\Controllers\FacturasController::class,'reporteCuentas']);
-        Route::get('cuenta/user={user}/cuenta={contador}/{clave}',[\App\Http\Controllers\CuentaController::class,'imprimirCuenta']);
+        Route::get('reporte_cuentas/user={user}/cliente={id}/{clave}',      [\App\Http\Controllers\FacturasController::class,'reporteCuentas']);
+        Route::get('cuenta/user={user}/cuenta={contador}/{clave}',          [\App\Http\Controllers\CuentaController::class,'imprimirCuenta']);
+        Route::get('orden_compra/user={user}/orden={cod}/{clave}',          [\App\Http\Controllers\OrdenCompraController::class,'pdf']);
     });
 
     Route::prefix('reportes')->group(function (){
@@ -143,4 +142,8 @@ Route::group(['middleware' => 'auth:api'], function (){
     Route::post('tipo_gasto', [\App\Http\Controllers\GastoController::class,'storeTipoGasto']);
     Route::get( 'tipo_gasto', [\App\Http\Controllers\GastoController::class,'indexTipoGasto']);
 //    Route::post('gastos',     [\App\Http\Controllers\GastoController::class,'store']);
+
+    Route::post('orden_compra',[\App\Http\Controllers\OrdenCompraController::class,'store']);
+    Route::get('orden_compras',[\App\Http\Controllers\OrdenCompraController::class,'index']);
+
 });

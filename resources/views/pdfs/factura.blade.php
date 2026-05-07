@@ -47,7 +47,7 @@
 <div class="text-center arial" style="font-size: 9px;">
     <small style="font-size: 40px; font-weight: bold">{{$sucursal->nombre}}</small>
     <div><small style="font-size: 30px">{{$sucursal->direccion_completa}}</small></div>
-    <div><small style="font-size: 25px">540 926 0578</small></div>
+    <div><small style="font-size: 25px">346 461 9433</small></div>
     <div style="margin-top: 45px"><small style="font-size: 35px; font-weight: bold">RECEIPT</small></div>
     <div class="text-center"><small style="font-size: 30px">{{$factura->contador}}</small></div>
 </div>
@@ -110,7 +110,9 @@
                 <td style="font-size: 20px" colspan="2" class="text-right">{{$empresa->moneda}} {{number_format($factura->cobrado,2)}}</td>
             </tr>
             <tr>
+
                 <td colspan="2" class="text-right" style="font-size: 20px">Change:</td>
+
                 <td style="font-size: 20px" colspan="2" class="text-right">{{$empresa->moneda}} {{number_format($factura->cambio,2)}}</td>
             </tr>
         </tbody>
