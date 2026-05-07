@@ -96,7 +96,7 @@ class FacturasController extends Controller
                     if (StockPadre::where('articulo_id', $cuerpo['id'])->where('activo', true)->count() > 0):
                         $stockPadre = StockPadre::where('articulo_id', $cuerpo['id'])->where('activo', true)->first();
                         if ($stockPadre):
-                            $stockArticulo = StockArticulo::where('sucursal_id', $request->sucursal)->where('articulo_id', $stockPadre->articulo_padre_id)->first();
+                            $stockArticulo = StockArticulo::where('sucursal_id', $request->sucursal_id)->where('articulo_id', $stockPadre->articulo_padre_id)->first();
                             if ($stockArticulo):
                                 $editStock               = StockArticulo::find($stockArticulo->id);
                                 $editStock->stock_actual = $editStock->stock_actual - $cuerpo['cantidad'];
